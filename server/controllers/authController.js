@@ -25,7 +25,12 @@ export const register = async (req, res) => {
             {expiresIn: "7D"}
         );
 
-        res.status(201).json(token);
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: token
+        });
     }
     catch(error) {
         res.status(500).json({message: `Server error! ${error}`});
@@ -52,7 +57,12 @@ export const login = async (req, res) => {
             {expiresIn: "7D"}
         )
 
-        res.status(200).json({ message: "Login Successfully", token: token});
+        res.status(200).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: token
+        });
     } catch (error) {
         res.status(500).json({message: `Server error! ${error}`});
     }
