@@ -5,10 +5,6 @@ export const createList = async (req,res) => {
     try {
         const {title, boardId} = req.body;
 
-        const existingBoard = await Board.findById(boardId);
-        if(!existingBoard)
-            return res.status(500).json({message: "No board found!"});
-
         const listCount = await List.countDocuments({board: boardId});
 
         const newList = await List.create({
@@ -17,7 +13,7 @@ export const createList = async (req,res) => {
             order: listCount
         });
 
-        res.status(201).json({message: "Created List Successfully", data: newList});
+        res.status(201).json(newList);
     } catch (error) {
         res.status(500).json({message: "Server error!", error: error});
     }
@@ -27,7 +23,7 @@ export const getList = async (req, res) => {
     try {
         const list = await List.find({board: req.params.boardId}).sort("order");
 
-        res.status(201).json({message: "Fetched List Successfully", data: list});
+        res.status(201).json(list);
     } catch (error) {
         res.status(500).json({message: "Server error!", error: error});
     }

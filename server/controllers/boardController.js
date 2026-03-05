@@ -7,11 +7,11 @@ export const createBoard = async (req, res) => {
         const {title} = req.body;
 
         const newBoard = await Board.create({
-            title,
+            title: title,
             owner: req.user
         });
 
-        res.status(200).json({message: "Created a board successfully!", data: newBoard});
+        res.status(200).json(newBoard);
     } catch (error) {
         res.status(500).json({message: "Server error!", error: error});
     }
@@ -20,11 +20,11 @@ export const createBoard = async (req, res) => {
 export const getBoards = async (req, res) => {
     try {
         
-        const boards = await Board.find();
+        const boards = await Board.find({ owner: req.user });
         if(!boards)
             return res.status(500).json({message: "No boards found!"});
 
-        res.status(200).json({message: "Fetch board successfully!", data: boards});
+        res.status(200).json(boards);
     } catch (error) {
         res.status(500).json({message: "Server error!", error: error});
     }

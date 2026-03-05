@@ -20,7 +20,7 @@ export const createCard = async (req, res) => {
 
     res
       .status(201)
-      .json({ message: "Created Card Successfully!", data: newCard });
+      .json(newCard);
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }
@@ -34,7 +34,7 @@ export const getCards = async (req, res) => {
 
     res
       .status(201)
-      .json({ message: "Fetched Cards Successfully!", data: card });
+      .json(card);
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }

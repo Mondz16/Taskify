@@ -7,5 +7,5 @@ const router = express.Router();
 router.post('/',protect, createBoard);
 router.get('/', protect, getBoards);
 router.get('/:id/full', protect, getFullBoards);
-
+    
 export default router;
