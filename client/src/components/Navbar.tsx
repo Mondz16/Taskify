@@ -14,7 +14,7 @@ export default function Navbar() {
   if (!user) return null;
 
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-3 bg-slate-900/95 backdrop-blur border-b border-slate-700/60 shadow-lg">
+    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 py-3 bg-slate-900/95 backdrop-blur border-b border-slate-700/60 shadow-lg">
       {/* Logo */}
       <Link
         to="/boards"

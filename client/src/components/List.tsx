@@ -42,7 +42,7 @@ export default function List({ list, refresh }: { list: any; refresh: Function }
             `}
           >
             {list.cards.map((card: any, index: number) => (
-              <Card key={card._id} card={card} index={index} />
+              <Card key={card._id} card={card} index={index} refresh={refresh} />
             ))}
             {provided.placeholder}
           </div>

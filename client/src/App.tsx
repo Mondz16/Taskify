@@ -7,34 +7,49 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Navbar from "./components/Navbar.tsx";
 import Board from "./components/Board.tsx";
+import { Toaster } from "sileo";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
+    <>
+      <Toaster
+        position="top-center"
+        options={{
+          fill: "#171717",
+          roundness: 16,
+          duration: 2000,
+          styles: {
+            badge: "bg-white/10!",
+            button: "bg-white/10! hover:bg-white/15!",
+          },
+        }}
+      />
+      <BrowserRouter>
+        <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/boards"
-          element={
-            <ProtectedRoute>
-              <Boards />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-        path="/boards/:id"
-        element={
-          <ProtectedRoute>
-            <Board />
-          </ProtectedRoute>
-        }>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/boards"
+            element={
+              <ProtectedRoute>
+                <Boards />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/boards/:id"
+            element={
+              <ProtectedRoute>
+                <Board />
+              </ProtectedRoute>
+            }
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
