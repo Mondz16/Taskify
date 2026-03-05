@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Card from "../models/Card.js";
 
 export const createCard = async (req, res) => {
@@ -6,10 +5,6 @@ export const createCard = async (req, res) => {
     const { title, description, listId } = req.body;
 
     const cardCount = await Card.countDocuments({ list: listId });
-    if (!cardCount)
-      res
-        .status(500)
-        .json({ message: "No Card found with the given list id!" });
 
     const newCard = await Card.create({
       title: title,
@@ -85,8 +80,29 @@ export const deleteCard = async (req, res) => {
     const deletedCard = await Card.findByIdAndDelete(req.params.id);
     res
       .status(201)
-      .json({ message: "Deleted Card Successfully!", data: deletedCard });
+      .json(deletedCard);
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }
 };
+
+export const updateCard = async (req, res) => {
+  try {
+    const { title, description } = req.body;
+
+    const card = await Card.findById(req.params.id);
+
+    if(!card){
+      return res.status(400).json({message: "Card not found!"});
+    }
+
+    card.title = title ?? card.title;
+    card.description = description ?? card.description;
+
+    await card.save();
+
+    res.json(card);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error!", error: error });
+  }
+}

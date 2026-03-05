@@ -7,7 +7,7 @@ const cardSchema = new mongoose.Schema({
     },
     description: {
         type:String,
-        required: false
+        default: ""
     },
     list: {
         type: mongoose.Schema.Types.ObjectId,
