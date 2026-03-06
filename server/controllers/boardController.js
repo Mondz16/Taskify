@@ -20,11 +20,29 @@ export const createBoard = async (req, res) => {
 export const getBoards = async (req, res) => {
     try {
         
-        const boards = await Board.find({ owner: req.user });
+        const boards = await Board.find({ owner: req.user , status: 'active' });
         if(!boards)
             return res.status(500).json({message: "No boards found!"});
 
         res.status(200).json(boards);
+    } catch (error) {
+        res.status(500).json({message: "Server error!", error: error});
+    }
+}
+
+export const updateBoard = async (req, res) => {
+    try {
+        const {title, status} = req.body;
+        const board = await Board.findOne({owner: req.user});
+
+        if(!board)
+            return res.status(500).json({message: "No boards found!"});
+
+        board.title = title ?? board.title;
+        board.status = status ?? board.status;
+        
+        await board.save();
+        res.status(200).json(board);
     } catch (error) {
         res.status(500).json({message: "Server error!", error: error});
     }
@@ -43,11 +61,11 @@ export const getFullBoards = async (req, res) => {
             return res.status(404).json({ message: "Board not found" });
         }
 
-        const lists = await List.find({board: board});
+        const lists = await List.find({board: board, status: 'active'});
 
         const listIds = lists.map(list => list._id);
 
-        const cards = await Card.find({list: {$in: listIds}}).sort("order");
+        const cards = await Card.find({list: {$in: listIds}, status: 'active'}).sort("order");
         
         const listWithCards = lists.map(list => ({
             ...list.toObject(),

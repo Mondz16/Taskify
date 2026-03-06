@@ -10,6 +10,12 @@ const listSchema = new mongoose.Schema({
         ref: "Board",
         required: true
     },
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'active',
+        required: true,
+    },
     order: {
         type: Number,
         required: true

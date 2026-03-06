@@ -88,7 +88,7 @@ export const deleteCard = async (req, res) => {
 
 export const updateCard = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description , status } = req.body;
 
     const card = await Card.findById(req.params.id);
 
@@ -98,6 +98,7 @@ export const updateCard = async (req, res) => {
 
     card.title = title ?? card.title;
     card.description = description ?? card.description;
+    card.status = status ?? card.status;
 
     await card.save();
 

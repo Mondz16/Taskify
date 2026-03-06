@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Droppable } from "@hello-pangea/dnd";
 import Card from "./Card.tsx";
 import API from "../services/api.tsx";
+import {sileo} from 'sileo';
 
 export default function List({ list, refresh }: { list: any; refresh: Function }) {
   const [newCardTitle, setNewCardTitle] = useState("");
@@ -20,13 +21,51 @@ export default function List({ list, refresh }: { list: any; refresh: Function }
     }
   };
 
+  const archiveStatus = async () => {
+    try {
+      await API.patch(`/lists/${list._id}/status`, {status: 'inactive'});
+      refresh();
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  }
+
   return (
     <div className="flex-shrink-0 w-72 bg-slate-900 border border-slate-700/60 rounded-2xl flex flex-col max-h-[calc(100vh-140px)] shadow-lg">
       {/* List header */}
       <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-slate-700/60">
         <h3 className="text-white font-semibold text-sm tracking-wide">{list.title}</h3>
-        <span className="text-xs text-slate-500 bg-slate-800 border border-slate-700 rounded-full px-2 py-0.5 font-medium">
-          {list.cards?.length ?? 0}
+        <span className="text-xs text-slate-500 hover:text-white rounded-full px-2 py-0.5 font-medium" 
+            onClick={() => {
+              sileo.action({
+                title: "Archive List?",
+                description: "Are you sure you want to archive this list?",
+                styles: {
+                  title: "text-[#007BFF]",
+                  description: "text-[#007BFF]",
+                },
+                button: {
+                  title: "Remove",
+                  onClick: () => {
+                    sileo.promise(archiveStatus(), {
+                      loading: { title: "Loading..." },
+                      success: { title: "List Removed!" },
+                      error: { title: "Failed" },
+                    });
+                  },
+                },
+              });
+            }}>
+              
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+            </svg>
         </span>
       </div>
 

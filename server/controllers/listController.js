@@ -42,3 +42,15 @@ export const updateListOrder = async (req, res) => {
         res.status(500).json({message: "Server error!", error: error});
     }
 }
+
+export const updateListStatus = async (req, res) => {
+    try {
+        const {status} = req.body;
+
+        const list = await List.findByIdAndUpdate(req.params.id, {status: status});
+
+        res.status(200).json(list);
+    } catch (error) {
+        res.status(500).json({message: "Server error!", error: error});
+    }
+}

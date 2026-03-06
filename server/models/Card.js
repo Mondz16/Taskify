@@ -18,6 +18,12 @@ const cardSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'active',
+        required: true
+    },
     due_date: {
         type: Date,
     }

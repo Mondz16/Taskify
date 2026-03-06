@@ -28,11 +28,13 @@ export default function CardModal({ card, onClose, refresh }: { card: any; onClo
     }
   };
 
-  const handleDelete = async () => {
+  const handleArchive = async () => {
     try {
-        const deletedCard = await API.delete(`/cards/${card._id}`);
+        const deletedCard = await API.put(`/cards/${card._id}`, { status: 'inactive'});
         refresh();
-        onClose();
+        await setTimeout(() => {
+          onClose();
+        }, 1000);
       console.log(deletedCard);
     } catch (error) {
         console.log(error);
@@ -100,15 +102,15 @@ export default function CardModal({ card, onClose, refresh }: { card: any; onClo
             onClick={() =>{
                 sileo.action({
                     title: "Removed Card?",
-                    description: "Are you sure you want to remove this card?",
+                    description: "Are you sure you want to archive this card?",
                     styles: {
                         title: "text-[#007BFF]",
                         description: "text-[#007BFF]"
                     },
                     button: {
-                        title: "Delete",
+                        title: "Remove",
                         onClick: () => {
-                            sileo.promise(handleDelete(), {
+                            sileo.promise(handleArchive(), {
                                     loading: { title: "Loading..." },
                                     success: { title: "Card Removed!" },
                                     error: { title: "Failed" },
@@ -119,7 +121,7 @@ export default function CardModal({ card, onClose, refresh }: { card: any; onClo
             }}
             className="px-4 py-2 text-sm text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-500 rounded-xl transition-all duration-200 cursor-pointer font-medium"
           >
-            Delete
+            Archive
           </button>
           <button
             onClick={() => onClose()}
