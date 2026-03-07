@@ -45,7 +45,11 @@ export default function Login() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 no-underline">
             <div className="w-9 h-9 rounded-xl bg-amber-400 flex items-center justify-center shadow-lg shadow-amber-400/20">
-              <svg className="w-5 h-5 text-slate-900" fill="currentColor" viewBox="0 0 20 20">
+              <svg
+                className="w-5 h-5 text-slate-900"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
                 <path d="M3 4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 8a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H4a1 1 0 01-1-1v-4zm8-8a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V4zm0 8a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
               </svg>
             </div>
@@ -87,9 +91,20 @@ export default function Login() {
             </div>
 
             {error && (
-              <div className="flex items-center gap-2 text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-2.5" role="alert">
-                <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              <div
+                className="flex items-center gap-2 text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-2.5"
+                role="alert"
+              >
+                <svg
+                  className="w-4 h-4 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 {error}
               </div>
@@ -107,7 +122,10 @@ export default function Login() {
 
         <p className="text-center text-slate-500 text-sm mt-6">
           Don't have an account?{" "}
-          <Link to="/register" className="text-amber-400 hover:text-amber-300 font-medium transition-colors">
+          <Link
+            to="/register"
+            className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
+          >
             Create one
           </Link>
         </p>

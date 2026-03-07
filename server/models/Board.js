@@ -1,20 +1,23 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const boardSchema = new mongoose.Schema({
+const boardSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     status: {
-        type: String,
-        enum: ['active', 'inactive'],
-        default: 'active',
-        required: true
+      type: String,
+      enum: ["active", "inactive"],
+      default: "active",
+      required: true,
     },
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-}, {timestamps: true});
+  },
+  { timestamps: true },
+);
 
 export default mongoose.model("Board", boardSchema);

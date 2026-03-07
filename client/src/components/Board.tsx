@@ -41,8 +41,8 @@ export default function Board() {
 
   const archiveBoard = async () => {
     try {
-      const {data} = await API.patch("/boards", { status: "inactive" });
-      console.log(`Archive Board: ${data.status}`);
+      const { data } = await API.patch("/boards", { status: "inactive" });
+      console.log(`Archive Board: ${JSON.stringify(data)}`);
       navigate("/boards");
     } catch (error) {
       console.log(`Something went wrong: ${error}`);

@@ -13,9 +13,7 @@ export const createCard = async (req, res) => {
       order: cardCount,
     });
 
-    res
-      .status(201)
-      .json(newCard);
+    res.status(201).json(newCard);
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }
@@ -27,9 +25,7 @@ export const getCards = async (req, res) => {
       "order",
     );
 
-    res
-      .status(201)
-      .json(card);
+    res.status(201).json(card);
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }
@@ -78,9 +74,7 @@ export const moveCard = async (req, res) => {
 export const deleteCard = async (req, res) => {
   try {
     const deletedCard = await Card.findByIdAndDelete(req.params.id);
-    res
-      .status(201)
-      .json(deletedCard);
+    res.status(201).json(deletedCard);
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }
@@ -88,12 +82,12 @@ export const deleteCard = async (req, res) => {
 
 export const updateCard = async (req, res) => {
   try {
-    const { title, description , status } = req.body;
+    const { title, description, status } = req.body;
 
     const card = await Card.findById(req.params.id);
 
-    if(!card){
-      return res.status(400).json({message: "Card not found!"});
+    if (!card) {
+      return res.status(400).json({ message: "Card not found!" });
     }
 
     card.title = title ?? card.title;
@@ -106,4 +100,4 @@ export const updateCard = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Server Error!", error: error });
   }
-}
+};
