@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/", protect, createBoard);
 router.post("/template", protect, createBoardWithProject);
 router.get("/", protect, getBoards);
-router.patch("/", protect, updateBoard);
+router.patch("/:id", protect, updateBoard);
 router.get("/:id/full", protect, getFullBoards);
 
 export default router;

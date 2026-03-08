@@ -30,7 +30,7 @@ export default function Board() {
 
   const handleTitleChange = async () => {
     try {
-      const { data } = await API.patch("/boards", { title: boardTitle });
+      const { data } = await API.patch(`/boards/${id}`, { title: boardTitle });
 
       console.log(`Updated Board: ${data.title}`);
       fetchBoard();
@@ -41,7 +41,7 @@ export default function Board() {
 
   const archiveBoard = async () => {
     try {
-      const { data } = await API.patch("/boards", { status: "inactive" });
+      const { data } = await API.patch(`/boards/${id}`, { status: "inactive" });
       console.log(`Archive Board: ${JSON.stringify(data)}`);
       navigate("/boards");
     } catch (error) {

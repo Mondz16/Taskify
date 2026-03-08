@@ -221,14 +221,13 @@ export default function Boards() {
       {showTemplate && (
         <TemplateModal
           onClose={() => setShowTemplate(false)}
-          // onSubmit={(e) => {
-          //   sileo.promise(handleTemplateSubmit(e),{
-          //     loading: {title: "Loading..."},
-          //     success: {title: "Board created!"},
-          //     error: {title: "Failed.."}
-          //   })
-          //   }
-          onSubmit={handleTemplateSubmit}
+          onSubmit={(e) => {
+            sileo.promise(handleTemplateSubmit(e), {
+              loading: { title: "Creating board..." },
+              success: { title: "Board created!" },
+              error: { title: "Failed.." },
+            });
+          }}
         />
       )}
     </div>

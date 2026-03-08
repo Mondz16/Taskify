@@ -42,7 +42,7 @@ Bullet list of the concrete deliverable(s) for this task.
 
 ## Technical Requirements
 Detailed bullet list of requirements. Be specific:
-- For frontend tasks: include pages and component structure, props, state, validation rules, UI behavior, accessibility notes, and which API endpoints to call.
+- For frontend tasks: include pages and component structure, props, state, validation rules, UI behavior, accessibility notes, libraries to use, and which API endpoints to call.
 - For backend tasks: include route method + path, controller logic, middleware, error cases, and HTTP status codes to return.
 - For database/model tasks: include the full schema with field names, types, constraints, indexes, and relationships to other models.
 - For auth tasks: include the strategy, token structure, storage approach, and security considerations.
@@ -56,7 +56,7 @@ Short checklist: how the developer knows this task is complete and working corre
       },
       {
         role: "user",
-        content: `Generate 14 to 20 ordered development tasks to build this project from scratch, following a logical implementation order (setup → backend models → backend routes → frontend pages → integration → testing → deployment).
+        content: `Generate 20 to 30 ordered development tasks to build this project from scratch, following a logical implementation order (setup → backend models → backend routes → frontend pages → integration → testing → deployment).
 
 Project Details:
 - Title: ${title}
